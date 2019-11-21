@@ -1,0 +1,408 @@
+openapi: 3.0.0
+info:
+  title: 白沙视讯
+  description: 视讯后台API
+  termsOfService: ''
+  contact:
+    name: baisha
+    url: ''
+    email: ''
+  license:
+    name: 'Apache 2.0'
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
+  version: 1.0.1
+servers:
+  -
+    url: 'http://127.0.0.1:82'
+    description: 本地环境
+  -
+    url: 'http://admin.wlc1.vip'
+    description: 测试环境
+paths:
+  /api/admin/login:
+    post:
+      tags:
+        - admin
+      summary: 登录
+      description: ''
+      operationId: adminLogin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  description: 用户名
+                  type: string
+                password:
+                  description: 密码
+                  type: string
+              type: object
+              example:
+                username: test
+                password: '123456'
+      responses:
+        200:
+          description: 成功
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    type: integer
+                  message:
+                    type: string
+                  data:
+                    properties:
+                      token_type:
+                        type: string
+                      expires_in:
+                        type: string
+                      access_token:
+                        type: string
+                      refresh_token:
+                        type: string
+                    type: object
+                type: object
+                example:
+                  code: 0
+                  message: 成功
+                  data:
+                    access_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI1IiwianRpIjoiMzE5MzJmZjE3MzZlOGVmMGM0NDQ3ZjMxMTJjMmY0MjRhNjI4YWVlYTM4ZGMwOWNlMWY5OTQzZTIyMTRlNzAxNjkyOWFlZWQ1NzJmNGJmNWUiLCJpYXQiOjE1NzQzMDQzNjcsIm5iZiI6MTU3NDMwNDM2NywiZXhwIjoxNTc0MzkwNzY3LCJzdWIiOiIxIiwic2NvcGVzIjpbIioiXX0.LQhBgOLVRONBuC7M58qWkAlWXdye6z_G3FqrQ4tJPKxxJE-XlrAQGY6KrAY4sWX1wqzDwP79_60CHY1Eq8JBPyrEX-Z0JwlBmw8-UGT0AGMZMoG6duNdXtXGONgxpxz2gKZzue71v1rWtZ9EgzmK-wRcoJUpIynaJrh1T6-qe7glJQ-jorhZm-wBnDdc7vgYm87kaNkDaF1hLPlQvkLxBdUQdYF_teLGsHWKT8Q7JpdcWHJHS1orq_h1OmAf3DMwRb-jgVb5nQHOqLxbc62BZcKtjEeHmjAf4aSNJRtjOguuYs-kKDJXaWNY2AQTZUeBAy_iGK5i10vxjBu2YnZ825-swpZzyc3LgkLUYjub1GKdRSVdtBk1HBK6GW9jv1Sd-lgMXLYWCrTGBbuRqik4GahOHxkc0CX_sZ0s5_JUK_XxreEdYjWFnwTYqy-2k0OfHjCgvI_8A273fHbxCs-LYrh2LyUr5ujp2qzYRyZh5ig-E7-ndZAeqnAdoEjgfwlIR-7CgCWF5WhXQewwZqZYpnWij26n3GvLvN3a4tineNnxGhf45CNqkvTSScWsH_zel_MofwfL0u1CBG9vvKoC4MN5lBjqysXapzBFuAGCW1pRuKno8vyedNxG10WZb1Egyf9FZ4lkjfACjHZmJySAqv7FWdcbAJpo5hLhegnbyC8
+                    refresh_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI1IiwianRpIjoiMzE5MzJmZjE3MzZlOGVmMGM0NDQ3ZjMxMTJjMmY0MjRhNjI4YWVlYTM4ZGMwOWNlMWY5OTQzZTIyMTRlNzAxNjkyOWFlZWQ1NzJmNGJmNWUiLCJpYXQiOjE1NzQzMDQzNjcsIm5iZiI6MTU3NDMwNDM2NywiZXhwIjoxNTc0MzkwNzY3LCJzdWIiOiIxIiwic2NvcGVzIjpbIioiXX0.LQhBgOLVRONBuC7M58qWkAlWXdye6z_G3FqrQ4tJPKxxJE-XlrAQGY6KrAY4sWX1wqzDwP79_60CHY1Eq8JBPyrEX-Z0JwlBmw8-UGT0AGMZMoG6duNdXtXGONgxpxz2gKZzue71v1rWtZ9EgzmK-wRcoJUpIynaJrh1T6-qe7glJQ-jorhZm-wBnDdc7vgYm87kaNkDaF1hLPlQvkLxBdUQdYF_teLGsHWKT8Q7JpdcWHJHS1orq_h1OmAf3DMwRb-jgVb5nQHOqLxbc62BZcKtjEeHmjAf4aSNJRtjOguuYs-kKDJXaWNY2AQTZUeBAy_iGK5i10vxjBu2YnZ825-swpZzyc3LgkLUYjub1GKdRSVdtBk1HBK6GW9jv1Sd-lgMXLYWCrTGBbuRqik4GahOHxkc0CX_sZ0s5_JUK_XxreEdYjWFnwTYqy-2k0OfHjCgvI_8A273fHbxCs-LYrh2LyUr5ujp2qzYRyZh5ig-E7-ndZAeqnAdoEjgfwlIR-7CgCWF5WhXQewwZqZYpnWij26n3GvLvN3a4tineNnxGhf45CNqkvTSScWsH_zel_MofwfL0u1CBG9vvKoC4MN5lBjqysXapzBFuAGCW1pRuKno8vyedNxG10WZb1Egyf9FZ4lkjfACjHZmJySAqv7FWdcbAJpo5hLhegnbyC8
+  /api/admin/logout:
+    post:
+      tags:
+        - admin
+      summary: 登出
+      description: ''
+      operationId: adminLogout
+      responses:
+        200:
+          $ref: '#/components/responses/success_empty_data'
+      security:
+        -
+          passport_password: {  }
+  /api/admin/personal_info:
+    get:
+      tags:
+        - admin
+      summary: 个人信息
+      description: ''
+      operationId: AdminGetPersonalInfo
+      responses:
+        200:
+          description: 成功
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    type: integer
+                  message:
+                    type: string
+                  data:
+                    properties:
+                      id:
+                        description: 管理员id
+                        type: integer
+                      parent_id:
+                        description: 父级ID
+                        type: integer
+                      level:
+                        description: '账号级别(1:股东,2:总代理,3:代理)'
+                        type: integer
+                      absolute_path:
+                        description: 用户层级路径
+                        type: string
+                      super_admin:
+                        description: '超级管理员 0否 1是'
+                        type: integer
+                      bucket_id:
+                        description: 代理编号
+                        type: string
+                      username:
+                        description: 用户名
+                        type: string
+                      nickname:
+                        description: 别名
+                        type: string
+                      email:
+                        description: 邮箱
+                        type: string
+                      balance:
+                        description: 代理余额
+                        type: string
+                      currency_id:
+                        description: 币别编号
+                        type: string
+                      status:
+                        description: '状态（1:启用,2:停用,3:冻结,4:锁单）'
+                        type: integer
+                      token:
+                        description: token
+                        type: string
+                      login_ip:
+                        description: 最后登录IP
+                        type: string
+                      login_addr:
+                        description: 最后登录地址
+                        type: string
+                      operation_admin_id:
+                        description: 操作人id
+                        type: integer
+                      operation_admin_ip:
+                        description: 操作人ip
+                        type: string
+                      created_at:
+                        description: 生成时间
+                        type: string
+                      updated_at:
+                        description: 修改时间
+                        type: string
+                    type: object
+                type: object
+                example:
+                  code: 0
+                  message: 成功
+                  data:
+                    id: 1
+                    parent_id: 0
+                    level: 0
+                    absolute_path: '0,'
+                    super_admin: 1
+                    bucket_id: '1'
+                    username: test
+                    nickname: '1'
+                    email: ''
+                    balance: '10018.01'
+                    currency_id: ''
+                    status: 1
+                    token: ''
+                    login_ip: ''
+                    login_addr: ''
+                    operation_admin_id: 0
+                    operation_admin_ip: ''
+                    created_at: '2019-11-30 00:00:00'
+                    updated_at: '2019-11-21 12:20:07'
+      security:
+        -
+          passport_password: {  }
+  /api/grant/add_permission:
+    post:
+      tags:
+        - permission
+      summary: 添加权限
+      description: ''
+      operationId: grantAddPermission
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - name
+              properties:
+                name:
+                  description: 权限名
+                  type: string
+              type: object
+              example:
+                name: 测试
+      responses:
+        200:
+          $ref: '#/components/responses/success_empty_data'
+      security:
+        -
+          passport_password: {  }
+  /api/grant/drop_permission:
+    post:
+      tags:
+        - permission
+      summary: 删除权限
+      description: ''
+      operationId: grantDropPermission
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - permission_id
+              properties:
+                permission_id:
+                  description: 权限id
+                  type: integer
+              type: object
+              example:
+                permission_id: 1
+      responses:
+        200:
+          $ref: '#/components/responses/success_empty_data'
+      security:
+        -
+          passport_password: {  }
+  /api/grant/add_role:
+    post:
+      tags:
+        - permission
+      summary: 添加角色
+      description: ''
+      operationId: grantAddRole
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - permission_id
+              properties:
+                permission_id:
+                  description: 权限id
+                  type: integer
+              type: object
+              example:
+                permission_id: 1
+      responses:
+        200:
+          $ref: '#/components/responses/success_empty_data'
+      security:
+        -
+          passport_password: {  }
+  /api/grant/drop_role:
+    post:
+      tags:
+        - permission
+      summary: 删除角色
+      description: ''
+      operationId: grantDropRole
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - permission_id
+              properties:
+                permission_id:
+                  description: 权限id
+                  type: integer
+              type: object
+              example:
+                permission_id: 1
+      responses:
+        200:
+          $ref: '#/components/responses/success_empty_data'
+      security:
+        -
+          passport_password: {  }
+  /api/grant/role_blind_permissions:
+    post:
+      tags:
+        - permission
+      summary: 角色绑定多个权限（全量更新）
+      description: ''
+      operationId: grantRoleBlindPermissions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - permission_ids
+                - role_id
+              properties:
+                role_id:
+                  description: 角色id
+                  type: integer
+                permission_ids:
+                  description: 权限ids（传入数组）
+                  type: array
+                  items: {  }
+              type: object
+              example:
+                role_id: 1
+                permission_ids:
+                  - 1
+                  - 2
+      responses:
+        200:
+          $ref: '#/components/responses/success_empty_data'
+      security:
+        -
+          passport_password: {  }
+  /api/grant/admin_blind_roles:
+    post:
+      tags:
+        - permission
+      summary: 用户绑定多个角色（全量更新）
+      description: ''
+      operationId: grantAdminBlindRoles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - admin_id
+                - role_ids
+              properties:
+                admin_id:
+                  description: 角色id
+                  type: integer
+                role_ids:
+                  description: 权限ids（传入数组）
+                  type: array
+                  items: {  }
+              type: object
+              example:
+                admin_id: 1
+                role_ids:
+                  - 1
+                  - 2
+      responses:
+        200:
+          $ref: '#/components/responses/success_empty_data'
+      security:
+        -
+          passport_password: {  }
+components:
+  schemas:
+    response_empty_data:
+      title: response_empty_data
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        data:
+          type: object
+      type: object
+  responses:
+    success_empty_data:
+      description: 成功无数据返回
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                type: integer
+              message:
+                type: string
+              data:
+                type: object
+            type: object
+            example:
+              code: 0
+              message: 成功
+              data: {  }
+  securitySchemes:
+    passport_password:
+      type: http
+      description: passport密码认证
+      bearerFormat: JWT
+      scheme: bearer
+tags:
+  -
+    name: admin
+    description: 管理员相关
+  -
+    name: permission
+    description: 权限相关
